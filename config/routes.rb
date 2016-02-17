@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+  # resources :students
+  resources :students do
+  collection do
+      match 'search' => 'students#search', via: [:get, :post], as: :search
+    end
+  end
+  resources :student_types
+  resources :student_categories
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :users
   get 'home/index'

@@ -11,7 +11,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160126171429) do
+ActiveRecord::Schema.define(version: 20160215175304) do
+
+  create_table "first_names", force: :cascade do |t|
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.integer  "student_type_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "first_names", ["student_type_id"], name: "index_first_names_on_student_type_id"
+
+  create_table "images", force: :cascade do |t|
+    t.string   "image"
+    t.string   "imageable_type"
+    t.integer  "imageable_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "student_categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "student_types", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "student_category_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "student_types", ["student_category_id"], name: "index_student_types_on_student_category_id"
+
+  create_table "students", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.integer  "student_type_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "students", ["student_type_id"], name: "index_students_on_student_type_id"
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                          null: false
