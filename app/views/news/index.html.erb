@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="col-md-7">
+    <div id="accordion">
+      <% @news.each do |news| %>
+        <h2><%= news.title %><span class='pull-right'>Published On:<%= news.published_on %></span></h2>
+        <div>
+          <p><%= news.content%></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%#= link_to 'New News', new_news_path %>
+<script type="text/javascript">
+  $( "#accordion" ).accordion();
+</script>

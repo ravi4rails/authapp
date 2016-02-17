@@ -57,3 +57,4 @@ gem "rmagick"
 gem "carrierwave"
 gem 'rails_admin'
 gem 'ransack'
+gem 'jquery-ui-rails'

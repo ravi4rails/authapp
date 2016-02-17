@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :news
   # resources :students
   resources :students do
   collection do

@@ -22,3 +22,6 @@ p {
 .logo {
   color:#CCC;
 }
+.ui-accordion-content p {
+  color:#000;
+}

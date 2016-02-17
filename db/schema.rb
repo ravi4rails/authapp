@@ -11,17 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160215175304) do
+ActiveRecord::Schema.define(version: 20160217185339) do
 
-  create_table "first_names", force: :cascade do |t|
-    t.string   "middle_name"
-    t.string   "last_name"
-    t.integer  "student_type_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "first_names", ["student_type_id"], name: "index_first_names_on_student_type_id"
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "images", force: :cascade do |t|
     t.string   "image"
@@ -29,6 +22,14 @@ ActiveRecord::Schema.define(version: 20160215175304) do
     t.integer  "imageable_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+  end
+
+  create_table "news", force: :cascade do |t|
+    t.string   "title"
+    t.date     "published_on"
+    t.text     "content"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "student_categories", force: :cascade do |t|
@@ -44,7 +45,7 @@ ActiveRecord::Schema.define(version: 20160215175304) do
     t.datetime "updated_at",          null: false
   end
 
-  add_index "student_types", ["student_category_id"], name: "index_student_types_on_student_category_id"
+  add_index "student_types", ["student_category_id"], name: "index_student_types_on_student_category_id", using: :btree
 
   create_table "students", force: :cascade do |t|
     t.string   "first_name"
@@ -55,9 +56,11 @@ ActiveRecord::Schema.define(version: 20160215175304) do
     t.datetime "updated_at",      null: false
   end
 
-  add_index "students", ["student_type_id"], name: "index_students_on_student_type_id"
+  add_index "students", ["student_type_id"], name: "index_students_on_student_type_id", using: :btree
 
   create_table "users", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "email",                  default: "", null: false
@@ -73,8 +76,6 @@ ActiveRecord::Schema.define(version: 20160215175304) do
     t.string   "provider"
     t.string   "uid"
     t.string   "username"
-    t.string   "last_name"
-    t.string   "first_name"
     t.string   "date_of_birth"
     t.string   "contact_1"
     t.string   "contact_2"
@@ -84,7 +85,9 @@ ActiveRecord::Schema.define(version: 20160215175304) do
     t.string   "country"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "student_types", "student_categories"
+  add_foreign_key "students", "student_types"
 end

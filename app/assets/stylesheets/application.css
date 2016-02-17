@@ -12,5 +12,6 @@
  *
  *= require bootstrap
  *= require custom
+ *= require jquery-ui
  *= require_self
  */
