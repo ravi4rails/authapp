@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'home/index'
+  # root 'home#index'
+
+  resources :assignment_tasks
+  resources :employee_types
+  resources :assignments
+  resources :employees
   resources :news
   # resources :students
   resources :students do

@@ -11,10 +11,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160217185339) do
+ActiveRecord::Schema.define(version: 20160218185021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assignment_tasks", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "assignment_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "assignment_tasks", ["assignment_id"], name: "index_assignment_tasks_on_assignment_id", using: :btree
+
+  create_table "assignments", force: :cascade do |t|
+    t.date     "submission_date"
+    t.string   "grade"
+    t.integer  "employee_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "employee_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "post"
+    t.integer  "employee_type_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
 
   create_table "images", force: :cascade do |t|
     t.string   "image"
@@ -88,6 +123,7 @@ ActiveRecord::Schema.define(version: 20160217185339) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "assignment_tasks", "assignments"
   add_foreign_key "student_types", "student_categories"
   add_foreign_key "students", "student_types"
 end

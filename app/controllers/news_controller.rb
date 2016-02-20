@@ -1,23 +1,18 @@
 class NewsController < ApplicationController
   before_action :set_news, only: [:show, :edit, :update, :destroy]
 
-  # GET /news
-  # GET /news.json
   def index
-    @news = News.all
+    @latest_news = News.last(5).reverse
+    @all_news = News.all - @latest_news
   end
 
-  # GET /news/1
-  # GET /news/1.json
   def show
   end
 
-  # GET /news/new
   def new
     @news = News.new
   end
 
-  # GET /news/1/edit
   def edit
   end
 

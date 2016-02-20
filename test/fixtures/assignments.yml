@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  submission_date: 2016-02-19
+  grade: MyString
+  employee_id: 1
+
+two:
+  submission_date: 2016-02-19
+  grade: MyString
+  employee_id: 1

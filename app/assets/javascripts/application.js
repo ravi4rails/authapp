@@ -15,4 +15,9 @@
 //= require turbolinks
 //= require bootstrap
 //= require jquery-ui
+//= require SmoothScroll
+//= require modernizr.custom
+//= require jquery.isotope
+//= require main
+//= require owl.carousel
 //= require cocoon
