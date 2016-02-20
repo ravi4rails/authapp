@@ -180,7 +180,6 @@ ul.about-list li span{
 
 /* Team Section */
 #tf-team{
-	/*background: url('/assets/team.jpg');*/
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
